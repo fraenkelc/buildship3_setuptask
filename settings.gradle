@@ -1,0 +1,4 @@
+include 'com.github.fraenkelc.oomph.gradle'
+include 'com.github.fraenkelc.oomph.gradle.edit'
+include 'p2mirror'
+include 'updatesite'

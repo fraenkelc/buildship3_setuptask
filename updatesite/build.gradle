@@ -1,0 +1,23 @@
+// Download from eclipse and put it into maven
+plugins { id 'org.standardout.bnd-platform' }
+platform {
+	determineImportVersions = true
+	importVersionStrategy = MAJOR
+	useBndHashQualifiers = false
+	fetchSources = false
+	generatePlatformFeature = false
+	useFeatureHashQualifiers = false
+	feature(id: "com.github.fraenkelc.oomph.gradle", name:"Import Gradle Project Setup Task", version:"$version.${rootProject.versionQualifier}") {
+		project.configurations.collectMany { it.allDependencies }.findAll { it instanceof ProjectDependency }.each {
+			plugin it
+		}
+	}
+}
+// don't let stale bundles lay around
+bundles.dependsOn(clean)
+// bundles relies on the underlying jars being built
+configurations.collectMany { it.allDependencies }.findAll { it instanceof ProjectDependency }.each {
+	bundles.dependsOn(it.dependencyProject.path + ':jar')
+}
+
+build.dependsOn(updateSite, updateSiteZip)

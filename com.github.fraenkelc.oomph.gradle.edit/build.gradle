@@ -1,0 +1,16 @@
+dependencies {
+	compile "eclipse-deps:org.eclipse.core.runtime:+"
+	compile "eclipse-deps:org.eclipse.emf.common:+"
+	compile "eclipse-deps:org.eclipse.emf.ecore:+"
+	compile "eclipse-deps:org.eclipse.emf.edit:+"
+	compile "eclipse-deps:org.eclipse.oomph.base.edit:+"
+	compile "eclipse-deps:org.eclipse.oomph.base:+"
+	compile "eclipse-deps:org.eclipse.oomph.predicates.edit:+"
+	compile "eclipse-deps:org.eclipse.oomph.predicates:+"
+	compile "eclipse-deps:org.eclipse.oomph.resources.edit:+"
+	compile "eclipse-deps:org.eclipse.oomph.resources:+"
+	compile "eclipse-deps:org.eclipse.oomph.setup.edit:+"
+	compile "eclipse-deps:org.eclipse.oomph.setup:+"
+	compile "eclipse-deps:org.eclipse.osgi:+"
+	compile project(":com.github.fraenkelc.oomph.gradle")
+}

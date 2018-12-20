@@ -1,0 +1,120 @@
+plugins {
+  id "org.standardout.bnd-platform" version "1.7.0" apply false
+  id "com.diffplug.gradle.p2.asmaven" version "3.17.0" apply false
+}
+
+allprojects {
+	version = "1.0.0"
+	group = "com.github.fraenkelc.oomph.gradle"
+}
+
+ext.versionQualifier = new java.text.SimpleDateFormat("yyyyMMddHHmmss").format(new Date())
+///////////
+// MAVEN //
+///////////
+subprojects {
+	repositories {
+		jcenter()
+		// local eclipse maven (created by Goomph)
+		maven {
+			url rootProject.file('p2mirror/build/p2asmaven/maven')
+		}
+	}
+}
+
+/////////////
+// PLUGINS //
+/////////////
+// tasks to clean and jar all of the plugins
+Closure IS_PLUGIN = { it.name.startsWith('com.github.fraenkelc') }
+configure(subprojects.findAll(IS_PLUGIN)) {
+	// we need the maven repo from p2
+	evaluationDependsOn(':p2mirror')
+
+	def PROJECT_NAME = it.name
+
+	//////////
+	// JAVA //
+	//////////
+	apply plugin: 'java'
+	sourceSets {
+		main { java {
+			srcDir 'src'
+		} }
+		test { java {
+			srcDir 'test'
+		} }
+	}
+	sourceCompatibility = VER_JAVA
+	targetCompatibility = VER_JAVA
+
+	tasks.jar {
+		manifest {
+			attributes "Bundle-Version": "$version.${rootProject.versionQualifier}"
+			from ("META-INF/MANIFEST.MF") {
+				eachEntry { details -> 
+					if (details.key == 'Bundle-Version') {
+						details.value = details.baseValue
+					}
+				}
+			}
+		}		
+	}
+	//////////////////////
+	// ECLIPSE PROJECTS //
+	//////////////////////
+	apply plugin: 'eclipse'
+	// remove the build folder
+	apply plugin: 'com.diffplug.gradle.eclipse.excludebuildfolder'
+	// improve the project deps
+	apply plugin: 'com.diffplug.gradle.eclipse.projectdeps'
+	// handle build.properties correctly
+	apply plugin: 'com.diffplug.gradle.eclipse.buildproperties'
+
+	eclipse {
+		project {
+			natures 'org.eclipse.pde.PluginNature'
+			natures 'org.eclipse.jdt.core.javanature'
+
+			buildCommand 'org.eclipse.jdt.core.javabuilder'
+			buildCommand 'org.eclipse.pde.ManifestBuilder'
+			buildCommand 'org.eclipse.pde.SchemaBuilder'
+		}
+		classpath {
+			downloadSources true
+			downloadJavadoc true
+		}
+		jdt {
+			sourceCompatibility VER_JAVA
+			targetCompatibility VER_JAVA
+		}
+	}
+	// always create "fresh" projects
+	tasks.eclipse.dependsOn(cleanEclipse)
+}
+
+def pluginPaths = subprojects.collect { ':' + it.name }.grep { it.startsWith(':com.github.fraenkelc.') }
+project(':updatesite') {
+	// the target platform will contain every jar
+	// which is added to the platform config, as
+	// well as all of its transitives, with OSGi
+	// metadata created automatically by bnd as
+	// required.
+	configurations {
+		platform
+		// no need to add the plugins from p2
+		all*.exclude group: 'eclipse-deps'
+	}
+	for (pluginPath in pluginPaths) {
+		it.evaluationDependsOn(pluginPath)
+		it.dependencies.add('platform', project(pluginPath))
+	}
+}
+
+/////////////////////////////////////////////////////////
+// Root eclipse project for tinkering with build files //
+/////////////////////////////////////////////////////////
+apply plugin: 'com.diffplug.gradle.eclipse.resourcefilters'
+eclipseResourceFilters {
+	exclude().folders().name('com.github.fraenkelc.*')
+}

@@ -1,0 +1,16 @@
+dependencies {
+	compile "eclipse-deps:org.eclipse.buildship.core:+"
+	compile "eclipse-deps:org.eclipse.core.jobs:+"
+	compile "eclipse-deps:org.eclipse.core.resources:+"
+	compile "eclipse-deps:org.eclipse.core.runtime:+"
+	compile "eclipse-deps:org.eclipse.emf.common:+"
+	compile "eclipse-deps:org.eclipse.emf.ecore:+"
+	compile "eclipse-deps:org.eclipse.equinox.common:+"
+	compile "eclipse-deps:org.eclipse.oomph.base:+"
+	compile "eclipse-deps:org.eclipse.oomph.predicates:+"
+	compile "eclipse-deps:org.eclipse.oomph.resources:+"
+	compile "eclipse-deps:org.eclipse.oomph.setup:+"
+	compile "eclipse-deps:org.eclipse.oomph.util:+"
+	compile "eclipse-deps:org.eclipse.osgi:+"
+}
+

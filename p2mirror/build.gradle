@@ -1,0 +1,29 @@
+plugins {
+  id 'com.diffplug.gradle.p2.asmaven'
+}
+// Download from eclipse and put it into maven
+p2AsMaven {
+	group 'eclipse-deps', {
+		repoEclipse '4.9'
+		repo('http://download.eclipse.org/buildship/updates/e49/releases/3.x')
+		repo('http://download.eclipse.org/oomph/updates/release')
+		repo('http://download.eclipse.org/modeling/emf/emf/builds/release/2.16')
+		//repo('http://download.eclipse.org/releases/2018-09/')
+		p2.addArtifactRepoBundlePool()
+		iu 'org.eclipse.buildship.core'
+		iu 'org.eclipse.core.resources'
+		iu 'org.eclipse.core.runtime'
+		iu 'org.eclipse.emf.ecore'
+		iu 'org.eclipse.emf.edit'
+		iu 'org.eclipse.oomph.base'
+		iu 'org.eclipse.oomph.base.edit'
+		iu 'org.eclipse.oomph.predicates'
+		iu 'org.eclipse.oomph.predicates.edit'
+		iu 'org.eclipse.oomph.resources'
+		iu 'org.eclipse.oomph.resources.edit'
+		iu 'org.eclipse.oomph.setup'
+		iu 'org.eclipse.oomph.setup.edit'
+		slicingOption 'latestVersionOnly', 'true'
+		repo2runnable()
+	}
+}
