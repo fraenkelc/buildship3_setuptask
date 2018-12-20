@@ -28,7 +28,7 @@ task publishP2Repo(type: GradleBuild) {
 	dependsOn(updateSite, updateSiteZip)
 	buildFile = file("$projectDir/upload.gradle")
 	tasks = ["publishP2Repo"]
-	startParameter.projectProperties = gradle.startParameter.projectProperties.findAll { it.startsWith("BINTRAY") }
+	startParameter.projectProperties = gradle.startParameter.projectProperties.findAll { it.key.startsWith("bintray") }
 	startParameter.projectProperties.version = "$version.${rootProject.versionQualifier}"
 	startParameter.useEmptySettings()
 }
