@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-Vendor: %providerName
 Bundle-SymbolicName: com.github.fraenkelc.oomph.gradle;singleton:=true
-Automatic-Module-Name: buildship3_setuptask
+Automatic-Module-Name: com.github.fraenkelc.oomph.gradle
 Bundle-Version: 1.1.0.qualifier
 Bundle-ClassPath: .
 Bundle-Localization: plugin
@@ -17,6 +17,7 @@ Require-Bundle: org.eclipse.core.runtime;bundle-version="[3.5.0,4.0.0)",
  org.eclipse.buildship.core;bundle-version="[3.0.0,4.0.0)",
  org.eclipse.oomph.resources;bundle-version="[1.1.0,2.0.0)";visibility:=reexport,
  org.eclipse.core.resources;bundle-version="[3.5.0,4.0.0)"
+Bundle-ActivationPolicy: lazy
 Export-Package: com.github.fraenkelc.oomph.gradle;version="1.1.0",
  com.github.fraenkelc.oomph.gradle.impl;version="1.1.0",
  com.github.fraenkelc.oomph.gradle.util;version="1.1.0"

@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-Vendor: %providerName
 Bundle-SymbolicName: com.github.fraenkelc.oomph.gradle.edit;singleton:=true
-Automatic-Module-Name: buildship3_setuptask.edit
+Automatic-Module-Name: com.github.fraenkelc.oomph.gradle.edit
 Bundle-Version: 1.1.0.qualifier
 Bundle-ClassPath: .
 Bundle-Activator: com.github.fraenkelc.oomph.gradle.provider.ImportGradleProjectEditPlugin$Implementation

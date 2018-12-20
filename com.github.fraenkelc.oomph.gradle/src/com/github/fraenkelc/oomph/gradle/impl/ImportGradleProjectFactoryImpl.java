@@ -23,96 +23,86 @@ import com.github.fraenkelc.oomph.gradle.ImportGradleProjectPackage;
 import com.github.fraenkelc.oomph.gradle.ImportGradleProjectTask;
 
 /**
- * <!-- begin-user-doc -->
- * An implementation of the model <b>Factory</b>.
- * <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model <b>Factory</b>. <!--
+ * end-user-doc -->
+ *
  * @generated
  */
-public class ImportGradleProjectFactoryImpl extends EFactoryImpl implements ImportGradleProjectFactory
-{
-  /**
-   * Creates the default factory implementation.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public static ImportGradleProjectFactory init()
-  {
-    try
-    {
-      ImportGradleProjectFactory theImportGradleProjectFactory = (ImportGradleProjectFactory)EPackage.Registry.INSTANCE
-          .getEFactory(ImportGradleProjectPackage.eNS_URI);
-      if (theImportGradleProjectFactory != null)
-      {
-        return theImportGradleProjectFactory;
-      }
-    }
-    catch (Exception exception)
-    {
-      EcorePlugin.INSTANCE.log(exception);
-    }
-    return new ImportGradleProjectFactoryImpl();
-  }
+public class ImportGradleProjectFactoryImpl extends EFactoryImpl implements ImportGradleProjectFactory {
+	/**
+	 * Creates the default factory implementation. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 *
+	 * @generated
+	 */
+	public static ImportGradleProjectFactory init() {
+		try {
+			ImportGradleProjectFactory theImportGradleProjectFactory = (ImportGradleProjectFactory) EPackage.Registry.INSTANCE
+					.getEFactory(ImportGradleProjectPackage.eNS_URI);
+			if (theImportGradleProjectFactory != null) {
+				return theImportGradleProjectFactory;
+			}
+		} catch (Exception exception) {
+			EcorePlugin.INSTANCE.log(exception);
+		}
+		return new ImportGradleProjectFactoryImpl();
+	}
 
-  /**
-   * Creates an instance of the factory.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public ImportGradleProjectFactoryImpl()
-  {
-    super();
-  }
+	/**
+	 * Creates an instance of the factory. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 *
+	 * @generated
+	 */
+	public ImportGradleProjectFactoryImpl() {
+		super();
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EObject create(EClass eClass)
-  {
-    switch (eClass.getClassifierID())
-    {
-    case ImportGradleProjectPackage.IMPORT_GRADLE_PROJECT_TASK:
-      return createImportGradleProjectTask();
-    default:
-      throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
-    }
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	@Override
+	public EObject create(EClass eClass) {
+		switch (eClass.getClassifierID()) {
+		case ImportGradleProjectPackage.IMPORT_GRADLE_PROJECT_TASK:
+			return createImportGradleProjectTask();
+		default:
+			throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+		}
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public ImportGradleProjectTask createImportGradleProjectTask()
-  {
-    ImportGradleProjectTaskImpl importGradleProjectTask = new ImportGradleProjectTaskImpl();
-    return importGradleProjectTask;
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	@Override
+	public ImportGradleProjectTask createImportGradleProjectTask() {
+		ImportGradleProjectTaskImpl importGradleProjectTask = new ImportGradleProjectTaskImpl();
+		return importGradleProjectTask;
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public ImportGradleProjectPackage getImportGradleProjectPackage()
-  {
-    return (ImportGradleProjectPackage)getEPackage();
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	@Override
+	public ImportGradleProjectPackage getImportGradleProjectPackage() {
+		return (ImportGradleProjectPackage) getEPackage();
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @deprecated
-   * @generated
-   */
-  @Deprecated
-  public static ImportGradleProjectPackage getPackage()
-  {
-    return ImportGradleProjectPackage.eINSTANCE;
-  }
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 *
+	 * @deprecated
+	 * @generated
+	 */
+	@Deprecated
+	public static ImportGradleProjectPackage getPackage() {
+		return ImportGradleProjectPackage.eINSTANCE;
+	}
 
 } // ImportGradleProjectFactoryImpl

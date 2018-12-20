@@ -8,7 +8,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="ImportGradleProjectTask" eSuperTypes="../../org.eclipse.oomph.setup/model/Setup.ecore#//SetupTask">
     <eAnnotations source="http://www.eclipse.org/oomph/setup/Enablement">
       <details key="variableName" value="p2.import.gradle.project"/>
-      <details key="repository" value="http://www.github.com/fraenkelc/buildship3_setuptask/updates"/>
+      <details key="repository" value="https://dl.bintray.com/fraenkelc/buildship3_setuptask/updates"/>
       <details key="installableUnits" value="buildship3_setuptask.feature.group"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/oomph/setup/ValidTriggers">
