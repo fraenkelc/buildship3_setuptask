@@ -1,5 +1,8 @@
 // Download from eclipse and put it into maven
-plugins { id 'org.standardout.bnd-platform' }
+plugins {
+	id 'org.standardout.bnd-platform'
+}
+
 platform {
 	determineImportVersions = true
 	importVersionStrategy = MAJOR
@@ -7,10 +10,9 @@ platform {
 	fetchSources = false
 	generatePlatformFeature = false
 	useFeatureHashQualifiers = false
+	categoryName = "oomph import tasks"
 	feature(id: "com.github.fraenkelc.oomph.gradle", name:"Import Gradle Project Setup Task", version:"$version.${rootProject.versionQualifier}") {
-		project.configurations.collectMany { it.allDependencies }.findAll { it instanceof ProjectDependency }.each {
-			plugin it
-		}
+		project.configurations.collectMany { it.allDependencies }.findAll { it instanceof ProjectDependency }.each { plugin it }
 	}
 }
 // don't let stale bundles lay around
@@ -21,3 +23,12 @@ configurations.collectMany { it.allDependencies }.findAll { it instanceof Projec
 }
 
 build.dependsOn(updateSite, updateSiteZip)
+
+task publishP2Repo(type: GradleBuild) {
+	dependsOn(updateSite, updateSiteZip)
+	buildFile = file("$projectDir/upload.gradle")
+	tasks = ["publishP2Repo"]
+	startParameter.projectProperties = gradle.startParameter.projectProperties.findAll { it.startsWith("BINTRAY") }
+	startParameter.projectProperties.version = "$version.${rootProject.versionQualifier}"
+	startParameter.useEmptySettings()
+}

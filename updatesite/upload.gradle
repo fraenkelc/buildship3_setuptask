@@ -1,0 +1,24 @@
+// the bintray-p2 polutes the classpath with its on version of org.osgi.framework.Version.
+// This causes conflicts with the p2 repo task. To resolve this we execute this task in a 
+// separate build.
+
+buildscript {
+	repositories {
+		jcenter()
+	}
+	dependencies {
+		classpath 'com.github.missedone:gradle-bintray-p2-plugin:1.2.0'
+	}
+}
+
+apply plugin: 'bintray-p2'
+
+publishP2Repo {
+	repoOwner = 'fraenkelc'
+	repoName = 'buildship3_setuptask'
+	user = bintrayUser
+	apiKey = bintrayAPIKey
+	packageVersion="$version"
+	compositePackage= 'updates'
+	updateSitePackage= 'releases'
+}
