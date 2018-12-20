@@ -4,7 +4,7 @@ Bundle-Name: %pluginName
 Bundle-Vendor: %providerName
 Bundle-SymbolicName: com.github.fraenkelc.oomph.gradle.edit;singleton:=true
 Automatic-Module-Name: buildship3_setuptask.edit
-Bundle-Version: 1.0.0.qualifier
+Bundle-Version: 1.1.0.qualifier
 Bundle-ClassPath: .
 Bundle-Activator: com.github.fraenkelc.oomph.gradle.provider.ImportGradleProjectEditPlugin$Implementation
 Bundle-ActivationPolicy: lazy
@@ -22,5 +22,5 @@ Require-Bundle: org.eclipse.core.runtime;bundle-version="[3.5.0,4.0.0)",
  org.eclipse.oomph.predicates.edit;bundle-version="[1.1.0,2.0.0)";visibility:=reexport,
  org.eclipse.oomph.resources;bundle-version="[1.1.0,2.0.0)";visibility:=reexport,
  org.eclipse.oomph.resources.edit;bundle-version="[1.1.0,2.0.0)";visibility:=reexport,
- com.github.fraenkelc.oomph.gradle;bundle-version="[1.0.0,2.0.0)";visibility:=reexport
-Export-Package: com.github.fraenkelc.oomph.gradle.provider;version="1.0.0"
+ com.github.fraenkelc.oomph.gradle;bundle-version="[1.1.0,2.0.0)";visibility:=reexport
+Export-Package: com.github.fraenkelc.oomph.gradle.provider;version="1.1.0"
