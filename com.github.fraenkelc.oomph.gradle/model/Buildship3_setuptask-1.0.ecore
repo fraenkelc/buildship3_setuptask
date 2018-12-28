@@ -17,5 +17,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="sourceLocators" lowerBound="1"
         upperBound="-1" eType="ecore:EClass http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Resources.ecore#//SourceLocator"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="preSynchronizatonTasks"
+        upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
 </ecore:EPackage>

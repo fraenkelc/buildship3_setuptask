@@ -16,6 +16,7 @@
       ecorePackage="ImportGradleProject.ecore#/" publicationLocation="/com.github.fraenkelc.oomph.gradle/model/Buildship3_setuptask-1.0.ecore">
     <genClasses ecoreClass="ImportGradleProject.ecore#//ImportGradleProjectTask">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImportGradleProject.ecore#//ImportGradleProjectTask/sourceLocators"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ImportGradleProject.ecore#//ImportGradleProjectTask/preSynchronizatonTasks"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

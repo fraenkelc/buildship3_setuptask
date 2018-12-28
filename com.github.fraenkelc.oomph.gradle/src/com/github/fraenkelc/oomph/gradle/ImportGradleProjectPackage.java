@@ -14,6 +14,7 @@ package com.github.fraenkelc.oomph.gradle;
 
 import org.eclipse.oomph.setup.SetupPackage;
 
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -175,13 +176,22 @@ public interface ImportGradleProjectPackage extends EPackage {
 	int IMPORT_GRADLE_PROJECT_TASK__SOURCE_LOCATORS = SetupPackage.SETUP_TASK_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Pre Synchronizaton Tasks</b></em>'
+	 * attribute list. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 *
+	 * @generated
+	 * @ordered
+	 */
+	int IMPORT_GRADLE_PROJECT_TASK__PRE_SYNCHRONIZATON_TASKS = SetupPackage.SETUP_TASK_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Task</em>' class. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 *
 	 * @generated
 	 * @ordered
 	 */
-	int IMPORT_GRADLE_PROJECT_TASK_FEATURE_COUNT = SetupPackage.SETUP_TASK_FEATURE_COUNT + 1;
+	int IMPORT_GRADLE_PROJECT_TASK_FEATURE_COUNT = SetupPackage.SETUP_TASK_FEATURE_COUNT + 2;
 
 	/**
 	 * Returns the meta object for class
@@ -206,6 +216,20 @@ public interface ImportGradleProjectPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getImportGradleProjectTask_SourceLocators();
+
+	/**
+	 * Returns the meta object for the attribute list
+	 * '{@link com.github.fraenkelc.oomph.gradle.ImportGradleProjectTask#getPreSynchronizatonTasks
+	 * <em>Pre Synchronizaton Tasks</em>}'. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 *
+	 * @return the meta object for the attribute list '<em>Pre Synchronizaton
+	 * Tasks</em>'.
+	 * @see com.github.fraenkelc.oomph.gradle.ImportGradleProjectTask#getPreSynchronizatonTasks()
+	 * @see #getImportGradleProjectTask()
+	 * @generated
+	 */
+	EAttribute getImportGradleProjectTask_PreSynchronizatonTasks();
 
 	/**
 	 * Returns the factory that creates the instances of the model. <!--
@@ -249,6 +273,16 @@ public interface ImportGradleProjectPackage extends EPackage {
 		 * @generated
 		 */
 		EReference IMPORT_GRADLE_PROJECT_TASK__SOURCE_LOCATORS = eINSTANCE.getImportGradleProjectTask_SourceLocators();
+
+		/**
+		 * The meta object literal for the '<em><b>Pre Synchronizaton
+		 * Tasks</b></em>' attribute list feature. <!-- begin-user-doc --> <!--
+		 * end-user-doc -->
+		 *
+		 * @generated
+		 */
+		EAttribute IMPORT_GRADLE_PROJECT_TASK__PRE_SYNCHRONIZATON_TASKS = eINSTANCE
+				.getImportGradleProjectTask_PreSynchronizatonTasks();
 
 	}
 

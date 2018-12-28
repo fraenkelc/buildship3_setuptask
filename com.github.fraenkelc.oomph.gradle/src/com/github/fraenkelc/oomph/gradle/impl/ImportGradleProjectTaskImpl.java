@@ -16,12 +16,12 @@ import org.eclipse.oomph.resources.SourceLocator;
 import org.eclipse.oomph.setup.SetupTaskContext;
 import org.eclipse.oomph.setup.Trigger;
 import org.eclipse.oomph.setup.impl.SetupTaskImpl;
-import org.eclipse.oomph.util.MonitorUtil;
 
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -34,15 +34,19 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IPath;
-import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.SubMonitor;
+import org.eclipse.osgi.util.NLS;
 
 import com.github.fraenkelc.oomph.gradle.ImportGradleProjectPackage;
 import com.github.fraenkelc.oomph.gradle.ImportGradleProjectTask;
 
+import org.gradle.tooling.ProjectConnection;
+
 import java.io.File;
 import java.util.Collection;
 import java.util.Optional;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 /**
@@ -54,6 +58,8 @@ import java.util.function.Supplier;
  * <ul>
  * <li>{@link com.github.fraenkelc.oomph.gradle.impl.ImportGradleProjectTaskImpl#getSourceLocators
  * <em>Source Locators</em>}</li>
+ * <li>{@link com.github.fraenkelc.oomph.gradle.impl.ImportGradleProjectTaskImpl#getPreSynchronizatonTasks
+ * <em>Pre Synchronizaton Tasks</em>}</li>
  * </ul>
  *
  * @generated
@@ -71,6 +77,17 @@ public class ImportGradleProjectTaskImpl extends SetupTaskImpl implements Import
 	 * @ordered
 	 */
 	protected EList<SourceLocator> sourceLocators;
+
+	/**
+	 * The cached value of the '{@link #getPreSynchronizatonTasks() <em>Pre
+	 * Synchronizaton Tasks</em>}' attribute list. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 *
+	 * @see #getPreSynchronizatonTasks()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<String> preSynchronizatonTasks;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -111,6 +128,20 @@ public class ImportGradleProjectTaskImpl extends SetupTaskImpl implements Import
 	 * @generated
 	 */
 	@Override
+	public EList<String> getPreSynchronizatonTasks() {
+		if (preSynchronizatonTasks == null) {
+			preSynchronizatonTasks = new EDataTypeUniqueEList<String>(String.class, this,
+					ImportGradleProjectPackage.IMPORT_GRADLE_PROJECT_TASK__PRE_SYNCHRONIZATON_TASKS);
+		}
+		return preSynchronizatonTasks;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 		case ImportGradleProjectPackage.IMPORT_GRADLE_PROJECT_TASK__SOURCE_LOCATORS:
@@ -129,6 +160,8 @@ public class ImportGradleProjectTaskImpl extends SetupTaskImpl implements Import
 		switch (featureID) {
 		case ImportGradleProjectPackage.IMPORT_GRADLE_PROJECT_TASK__SOURCE_LOCATORS:
 			return getSourceLocators();
+		case ImportGradleProjectPackage.IMPORT_GRADLE_PROJECT_TASK__PRE_SYNCHRONIZATON_TASKS:
+			return getPreSynchronizatonTasks();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -146,6 +179,10 @@ public class ImportGradleProjectTaskImpl extends SetupTaskImpl implements Import
 			getSourceLocators().clear();
 			getSourceLocators().addAll((Collection<? extends SourceLocator>) newValue);
 			return;
+		case ImportGradleProjectPackage.IMPORT_GRADLE_PROJECT_TASK__PRE_SYNCHRONIZATON_TASKS:
+			getPreSynchronizatonTasks().clear();
+			getPreSynchronizatonTasks().addAll((Collection<? extends String>) newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -161,6 +198,9 @@ public class ImportGradleProjectTaskImpl extends SetupTaskImpl implements Import
 		case ImportGradleProjectPackage.IMPORT_GRADLE_PROJECT_TASK__SOURCE_LOCATORS:
 			getSourceLocators().clear();
 			return;
+		case ImportGradleProjectPackage.IMPORT_GRADLE_PROJECT_TASK__PRE_SYNCHRONIZATON_TASKS:
+			getPreSynchronizatonTasks().clear();
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -175,8 +215,28 @@ public class ImportGradleProjectTaskImpl extends SetupTaskImpl implements Import
 		switch (featureID) {
 		case ImportGradleProjectPackage.IMPORT_GRADLE_PROJECT_TASK__SOURCE_LOCATORS:
 			return sourceLocators != null && !sourceLocators.isEmpty();
+		case ImportGradleProjectPackage.IMPORT_GRADLE_PROJECT_TASK__PRE_SYNCHRONIZATON_TASKS:
+			return preSynchronizatonTasks != null && !preSynchronizatonTasks.isEmpty();
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) {
+			return super.toString();
+		}
+
+		StringBuilder result = new StringBuilder(super.toString());
+		result.append(" (preSynchronizatonTasks: ");
+		result.append(preSynchronizatonTasks);
+		result.append(')');
+		return result.toString();
 	}
 
 	/*
@@ -216,18 +276,20 @@ public class ImportGradleProjectTaskImpl extends SetupTaskImpl implements Import
 	@Override
 	public void perform(SetupTaskContext context) throws Exception {
 		EList<SourceLocator> sourceLocators = getSourceLocators();
-		int size = sourceLocators.size();
-
-		IProgressMonitor monitor = context.getProgressMonitor(true);
-		monitor.beginTask("", size);
+		EList<String> tasks = getPreSynchronizatonTasks();
+		SubMonitor monitor = SubMonitor.convert(context.getProgressMonitor(true));
+		monitor.beginTask("", sourceLocators.size() * 2); //$NON-NLS-1$
 		try {
 			GradleWorkspace workspace = GradleCore.getWorkspace();
 			for (SourceLocator sourceLocator : sourceLocators) {
+				context.log(NLS.bind(Messages.ImportGradleProjectTaskImpl_0, sourceLocator.getRootFolder()));
+				SubMonitor progress = monitor.newChild(2);
 				Optional<GradleBuild> gradleBuild = Optional.empty();
 				for (IProject project : ROOT.getProjects()) {
 					if (!gradleBuild.isPresent()
 							&& project.getLocation().equals(new Path(sourceLocator.getRootFolder()))) {
 						gradleBuild = workspace.getBuild(project);
+						context.log(NLS.bind(Messages.ImportGradleProjectTaskImpl_1, project.getName()));
 					}
 				}
 
@@ -243,10 +305,24 @@ public class ImportGradleProjectTaskImpl extends SetupTaskImpl implements Import
 								.forRootProjectDirectory(new File(sourceLocator.getRootFolder()))
 								.overrideWorkspaceConfiguration(false)
 								.gradleDistribution(GradleDistribution.fromBuild()).autoSync(false).build();
+						context.log(Messages.ImportGradleProjectTaskImpl_3);
 						return workspace.createBuild(configuration);
 					}
 				});
-				newBuild.synchronize(MonitorUtil.create(monitor, 1));
+				if (!tasks.isEmpty()) {
+					context.log(Messages.ImportGradleProjectTaskImpl_2);
+					newBuild.withConnection(new Function<ProjectConnection, Void>() {
+
+						@Override
+						public Void apply(ProjectConnection t) {
+							t.newBuild().forTasks(tasks.toArray(new String[0])).run();
+							return null;
+						}
+					}, progress.newChild(1));
+				}
+				progress.setWorkRemaining(1);
+
+				newBuild.synchronize(progress.newChild(1));
 			}
 		} finally {
 			monitor.done();

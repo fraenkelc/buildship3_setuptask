@@ -23,6 +23,7 @@ p2AsMaven {
 		iu 'org.eclipse.oomph.resources.edit'
 		iu 'org.eclipse.oomph.setup'
 		iu 'org.eclipse.oomph.setup.edit'
+		iu 'org.gradle.toolingapi'
 		slicingOption 'latestVersionOnly', 'true'
 		repo2runnable()
 	}

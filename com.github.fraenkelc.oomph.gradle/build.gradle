@@ -12,5 +12,6 @@ dependencies {
 	compile "eclipse-deps:org.eclipse.oomph.setup:+"
 	compile "eclipse-deps:org.eclipse.oomph.util:+"
 	compile "eclipse-deps:org.eclipse.osgi:+"
+	compile "eclipse-deps:org.gradle.toolingapi:+"
 }
 

@@ -16,7 +16,9 @@ import org.eclipse.oomph.setup.provider.SetupTaskItemProvider;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import com.github.fraenkelc.oomph.gradle.ImportGradleProjectPackage;
@@ -54,8 +56,26 @@ public class ImportGradleProjectTaskItemProvider extends SetupTaskItemProvider {
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addPreSynchronizatonTasksPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Pre Synchronizaton Tasks feature.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	protected void addPreSynchronizatonTasksPropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_ImportGradleProjectTask_preSynchronizatonTasks_feature"),
+						getString("_UI_PropertyDescriptor_description",
+								"_UI_ImportGradleProjectTask_preSynchronizatonTasks_feature",
+								"_UI_ImportGradleProjectTask_type"),
+						ImportGradleProjectPackage.Literals.IMPORT_GRADLE_PROJECT_TASK__PRE_SYNCHRONIZATON_TASKS, true,
+						false, false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -146,6 +166,9 @@ public class ImportGradleProjectTaskItemProvider extends SetupTaskItemProvider {
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(ImportGradleProjectTask.class)) {
+		case ImportGradleProjectPackage.IMPORT_GRADLE_PROJECT_TASK__PRE_SYNCHRONIZATON_TASKS:
+			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+			return;
 		case ImportGradleProjectPackage.IMPORT_GRADLE_PROJECT_TASK__SOURCE_LOCATORS:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 			return;

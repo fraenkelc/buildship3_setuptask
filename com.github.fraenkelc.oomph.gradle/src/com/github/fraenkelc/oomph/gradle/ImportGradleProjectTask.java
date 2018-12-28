@@ -27,6 +27,8 @@ import org.eclipse.emf.common.util.EList;
  * <ul>
  * <li>{@link com.github.fraenkelc.oomph.gradle.ImportGradleProjectTask#getSourceLocators
  * <em>Source Locators</em>}</li>
+ * <li>{@link com.github.fraenkelc.oomph.gradle.ImportGradleProjectTask#getPreSynchronizatonTasks
+ * <em>Pre Synchronizaton Tasks</em>}</li>
  * </ul>
  *
  * @see com.github.fraenkelc.oomph.gradle.ImportGradleProjectPackage#getImportGradleProjectTask()
@@ -58,4 +60,22 @@ public interface ImportGradleProjectTask extends SetupTask {
 	 * @generated
 	 */
 	EList<SourceLocator> getSourceLocators();
+
+	/**
+	 * Returns the value of the '<em><b>Pre Synchronizaton Tasks</b></em>'
+	 * attribute list. The list contents are of type {@link java.lang.String}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Pre Synchronizaton Tasks</em>' attribute list
+	 * isn't clear, there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 *
+	 * @return the value of the '<em>Pre Synchronizaton Tasks</em>' attribute
+	 * list.
+	 * @see com.github.fraenkelc.oomph.gradle.ImportGradleProjectPackage#getImportGradleProjectTask_PreSynchronizatonTasks()
+	 * @model
+	 * @generated
+	 */
+	EList<String> getPreSynchronizatonTasks();
 } // ImportGradleProjectTask

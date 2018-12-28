@@ -17,6 +17,7 @@ import org.eclipse.oomph.predicates.PredicatesPackage;
 import org.eclipse.oomph.resources.ResourcesPackage;
 import org.eclipse.oomph.setup.SetupPackage;
 
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -142,6 +143,16 @@ public class ImportGradleProjectPackageImpl extends EPackageImpl implements Impo
 	 * @generated
 	 */
 	@Override
+	public EAttribute getImportGradleProjectTask_PreSynchronizatonTasks() {
+		return (EAttribute) importGradleProjectTaskEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 *
+	 * @generated
+	 */
+	@Override
 	public ImportGradleProjectFactory getImportGradleProjectFactory() {
 		return (ImportGradleProjectFactory) getEFactoryInstance();
 	}
@@ -169,6 +180,7 @@ public class ImportGradleProjectPackageImpl extends EPackageImpl implements Impo
 		// Create classes and their features
 		importGradleProjectTaskEClass = createEClass(IMPORT_GRADLE_PROJECT_TASK);
 		createEReference(importGradleProjectTaskEClass, IMPORT_GRADLE_PROJECT_TASK__SOURCE_LOCATORS);
+		createEAttribute(importGradleProjectTaskEClass, IMPORT_GRADLE_PROJECT_TASK__PRE_SYNCHRONIZATON_TASKS);
 	}
 
 	/**
@@ -214,6 +226,9 @@ public class ImportGradleProjectPackageImpl extends EPackageImpl implements Impo
 		initEReference(getImportGradleProjectTask_SourceLocators(), theResourcesPackage.getSourceLocator(), null,
 				"sourceLocators", null, 1, -1, ImportGradleProjectTask.class, !IS_TRANSIENT, !IS_VOLATILE,
 				IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getImportGradleProjectTask_PreSynchronizatonTasks(), ecorePackage.getEString(),
+				"preSynchronizatonTasks", null, 0, -1, ImportGradleProjectTask.class, !IS_TRANSIENT, !IS_VOLATILE,
+				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource("http://www.github.com/fraenkelc/buildship3_setuptask/schemas/Buildship3_setuptask-1.0.ecore");
