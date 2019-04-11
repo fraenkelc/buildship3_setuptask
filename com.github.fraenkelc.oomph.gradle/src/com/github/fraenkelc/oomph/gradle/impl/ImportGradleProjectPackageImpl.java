@@ -267,7 +267,7 @@ public class ImportGradleProjectPackageImpl extends EPackageImpl implements Impo
 		addAnnotation(importGradleProjectTaskEClass, source,
 				new String[] { "variableName", "p2.import.gradle.project", "repository",
 						"https://dl.bintray.com/fraenkelc/buildship3_setuptask/updates", "installableUnits",
-						"buildship3_setuptask.feature.group" });
+						"com.github.fraenkelc.oomph.gradle.feature.group" });
 	}
 
 	/**

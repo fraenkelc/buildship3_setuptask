@@ -35,7 +35,7 @@ import org.eclipse.emf.common.util.EList;
  * @model annotation="http://www.eclipse.org/oomph/setup/Enablement
  * variableName='p2.import.gradle.project'
  * repository='https://dl.bintray.com/fraenkelc/buildship3_setuptask/updates'
- * installableUnits='buildship3_setuptask.feature.group'"
+ * installableUnits='com.github.fraenkelc.oomph.gradle.feature.group'"
  * annotation="http://www.eclipse.org/oomph/setup/ValidTriggers
  * triggers='STARTUP MANUAL'"
  * @generated
