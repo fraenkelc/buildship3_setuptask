@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<setup:Project
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:git="http://www.eclipse.org/oomph/setup/git/1.0"
+    xmlns:gradle="http://www.github.com/fraenkelc/buildship3_setuptask/1.0"
+    xmlns:jdt="http://www.eclipse.org/oomph/setup/jdt/1.0"
+    xmlns:setup="http://www.eclipse.org/oomph/setup/1.0"
+    xmlns:setup.p2="http://www.eclipse.org/oomph/setup/p2/1.0"
+    xsi:schemaLocation="http://www.eclipse.org/oomph/setup/git/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Git.ecore http://www.github.com/fraenkelc/buildship3_setuptask/1.0 http://www.github.com/fraenkelc/buildship3_setuptask/schemas/Buildship3_setuptask-1.0.ecore http://www.eclipse.org/oomph/setup/jdt/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/JDT.ecore"
+    name="buildshipSetupTask"
+    label="Buildship 3 setup task">
+  <setupTask
+      xsi:type="jdt:JRETask"
+      version="JavaSE-1.8"
+      location="${jre.location-1.8}">
+    <description>Define the JRE needed to compile and run the Java projects of ${scope.project.label}</description>
+  </setupTask>
+  <setupTask
+      xsi:type="setup:EclipseIniTask"
+      option="-Xmx"
+      value="1024m"
+      vm="true">
+    <description>Set the heap space needed to work with the projects of ${scope.project.label}</description>
+  </setupTask>
+  <setupTask
+      xsi:type="setup:VariableTask"
+      name="eclipse.target.platform"
+      defaultValue="2018-12"
+      storageURI="scope://Workspace"/>
+  <setupTask
+      xsi:type="setup.p2:P2Task">
+    <requirement
+        name="com.github.fraenkelc.oomph.gradle.feature.group"
+        versionRange="[1.2.0.20181228160435,2.0.0)"/>
+    <requirement
+        name="org.eclipse.emf.sdk.feature.group"/>
+    <requirement
+        name="org.eclipse.oomph.projectcopy.feature.group"/>
+    <requirement
+        name="org.eclipse.oomph.version.feature.group"/>
+    <requirement
+        name="org.eclipse.emf.ecoretools.sdk.feature.group"/>
+    <requirement
+        name="org.eclipse.pde.api.tools.ee.feature.feature.group"
+        optional="true"/>
+    <repository
+        url="http://download.eclipse.org/modeling/emf/emf/builds/nightly/latest"/>
+    <repository
+        url="https://dl.bintray.com/fraenkelc/buildship3_setuptask/updates/"/>
+    <description>Install the tools needed in the IDE to work with the source code for ${scope.project.label}</description>
+  </setupTask>
+  <setupTask
+      xsi:type="git:GitCloneTask"
+      id="git.clone.buildshipSetupTask"
+      remoteURI="https://github.com/fraenkelc/buildship3_setuptask.git">
+    <description>${scope.project.label}</description>
+  </setupTask>
+  <setupTask
+      xsi:type="gradle:ImportGradleProjectTask">
+    <sourceLocators
+        rootFolder="${git.clone.buildshipSetupTask.location}"/>
+  </setupTask>
+  <stream name="master"
+      label="Master">
+    <setupTask
+        xsi:type="setup:EclipseIniTask"
+        option="-Doomph.redirection.buildshipSetupTask"
+        value="=https://raw.githubusercontent.com/fraenkelc/buildship3_setuptask/master/Buildship3SetupTask.setup->${git.clone.buildshipSetupTask.location|uri}/Buildship3SetupTask.setup"
+        vm="true">
+      <description>
+        Set an Oomph redirection system property to redirect the logical location of this setup to its physical location in the Git clone.
+        Before enabling this task, replace '...' with the repository path of this setup's containing project.
+      </description>
+    </setupTask>
+  </stream>
+  <logicalProjectContainer
+      xsi:type="setup:ProjectCatalog"
+      href="index:/org.eclipse.setup#//@projectCatalogs[name='org.eclipse']"/>
+  <description>
+    Buildship 3 setup task provides an oomph setup task
+    for gradle project imports using eclipse buildship
+  </description>
+</setup:Project>
